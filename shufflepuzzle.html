@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+	<title>Shuffle cards Puzzle</title>
+</head>
+<style>
+body{
+  margin:0 auto;
+  font-family: BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol',Noto Color Emoji
+}
+h1, h2{
+	text-align:center;
+}
+.parent{
+  display:flex; flex-wrap:wrap;
+}
+button{
+  background-color:#72C3DC;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #72C3DC;
+  height: 5rem;
+  width: 10rem;
+  color:#ffffff;
+  font-size: 1rem;
+  margin: 1rem;
+}
+button:hover{
+  cursor: pointer;
+}
+.parent div{
+  width: 30%;
+  text-align: center;
+  height: 2rem;
+  padding: 1.5rem 0px;
+  color: #ffffff;
+  font-size: 2rem;
+}
+.parent div:hover{
+  cursor: pointer
+}
+.parent div:nth-child(1), .parent div:nth-child(8){
+  background-color: #6F98A8
+}
+.parent div:nth-child(2), .parent div:nth-child(4){
+  background-color: #2b8ead;
+}
+.parent div:nth-child(3), .parent div:nth-child(5), .parent div:nth-child(9){
+  background-color: #2F454E;
+}
+.parent div:nth-child(6), .parent div:nth-child(7){
+  background-color: #BFBFBF;
+}
+.container{
+	display:flex; flex-direction:row; background-color:#EFEFEF;
+}
+.puzzlebox{
+	flex:3;
+}
+.btncontainer{
+	flex:1; text-align: center
+}
+@media screen(width:572px){
+	.parent{
+		display:flex; flex-wrap:wrap; flex-direction:column
+	}
+}
+
+@media only screen and (max-width: 576px) {
+  .parent {
+    /*max-width: 540px;*/
+	display:flex; flex-wrap:wrap; flex-direction:column
+  }
+  h1{
+	background-color:#000000;
+	color: #ffffff;
+	padding:1rem;
+  }
+  body{
+	margin:0 auto;
+  }
+}
+
+@media (min-width:768px && max-width: 800px) {
+  .parent {
+    /*max-width: 720px;*/
+	display:flex; flex-wrap:wrap; flex-direction:column
+  }
+}
+</style>
+<body>
+<div><h1>Shuffle and Sort</h1></div>
+<div class="container">
+	<div id="app" class="puzzlebox"></div>
+	<div class="btncontainer"><button onclick="randomArrayShuffle(numbereslist)">SHUFFLE</button> <br> <button onclick="sortArrayShuffled(numbereslist)">SORT</button></div>
+<script>
+const appDiv = document.getElementById('app');
+var numbereslist=[1,2,3,4,5,6,7,8,9];
+function randomArrayShuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  //alert(array);
+  let puzzle = '';
+  array.forEach((item)=>{
+    puzzle += '<div>'+item+'</div>'
+    console.log(puzzle)})
+    appDiv.innerHTML = `<div>
+    <div class="parent">
+      ${puzzle}
+    </div>     
+</div>`
+  return array;
+}
+function sortArrayShuffled(array) { 
+  array.sort();
+  let puzzle = '';
+  array.forEach((item)=>{
+    puzzle += '<div>'+item+'</div>'
+    console.log(puzzle)})
+    appDiv.innerHTML = `<div>
+    <div class="parent">
+      ${puzzle}
+    </div>     
+</div>`
+  return array;
+}
+
+// randomArrayShuffle(numbereslist); 
+sortArrayShuffled(numbereslist);
+
+</script>	
+</body>
+</html>
+
+
