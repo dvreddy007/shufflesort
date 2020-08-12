@@ -39,6 +39,34 @@ button:hover{
 .parent div:hover{
   cursor: pointer
 }
+.one{
+	background-color: #6F98A8
+}
+.two{
+	background-color: #2b8ead;
+}
+.three{
+	background-color: #2F454E;
+}
+.four{
+	background-color: #2b8ead;
+}
+.five{
+	background-color: #2F454E;
+}
+.six{
+	background-color: #BFBFBF;
+}
+.seven{
+	background-color: #BFBFBF;
+}
+.eight{
+	background-color: #6F98A8
+}
+.nine{
+	background-color: #2F454E;
+}
+/*
 .parent div:nth-child(1), .parent div:nth-child(8){
   background-color: #6F98A8
 }
@@ -50,7 +78,7 @@ button:hover{
 }
 .parent div:nth-child(6), .parent div:nth-child(7){
   background-color: #BFBFBF;
-}
+}*/
 .container{
 	display:flex; flex-direction:row; background-color:#EFEFEF;
 }
@@ -95,7 +123,8 @@ button:hover{
 	<div class="btncontainer"><button onclick="randomArrayShuffle(numbereslist)">SHUFFLE</button> <br> <button onclick="sortArrayShuffled(numbereslist)">SORT</button></div>
 <script>
 const appDiv = document.getElementById('app');
-var numbereslist=[1,2,3,4,5,6,7,8,9];
+//var numbereslist=[1,2,3,4,5,6,7,8,9];
+var numbereslist=[{itemval:1, cssclass:'one'}, {itemval:2, cssclass:'two'},{itemval:3, cssclass:'three'},{itemval:4, cssclass:'four'},{itemval:5, cssclass:'five'},{itemval:6, cssclass:'six'},{itemval:7, cssclass:'seven'},{itemval:8, cssclass:'eight'}, {itemval:9, cssclass:'nine'}];
 function randomArrayShuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
   while (0 !== currentIndex) {
@@ -107,8 +136,8 @@ function randomArrayShuffle(array) {
   }
   //alert(array);
   let puzzle = '';
-  array.forEach((item)=>{
-    puzzle += '<div>'+item+'</div>'
+  array.forEach((item, index)=>{
+    puzzle += '<div class='+item.cssclass+'>'+item.itemval+'</div>'
     console.log(puzzle)})
     appDiv.innerHTML = `<div>
     <div class="parent">
@@ -118,10 +147,10 @@ function randomArrayShuffle(array) {
   return array;
 }
 function sortArrayShuffled(array) { 
-  array.sort();
+  array.sort((a,b)=>{return a.itemval - b.itemval});
   let puzzle = '';
-  array.forEach((item)=>{
-    puzzle += '<div>'+item+'</div>'
+  array.forEach((item, index)=>{
+    puzzle += '<div class='+item.cssclass+'>'+item.itemval+'</div>'
     console.log(puzzle)})
     appDiv.innerHTML = `<div>
     <div class="parent">
@@ -130,12 +159,8 @@ function sortArrayShuffled(array) {
 </div>`
   return array;
 }
-
 // randomArrayShuffle(numbereslist); 
 sortArrayShuffled(numbereslist);
-
 </script>	
 </body>
 </html>
-
-
